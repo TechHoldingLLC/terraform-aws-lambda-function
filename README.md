@@ -29,6 +29,7 @@ No modules.
 | [aws_lambda_permission.api](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.cognito](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.eventbridge](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_lambda_permission.permission](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.sqs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [archive_file.lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_iam_policy_document.lambda_service_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -60,6 +61,7 @@ No modules.
 | <a name="input_s3_bucket"></a> [s3\_bucket](#input\_s3\_bucket) | Lambda artifacts bucket | `string` | `""` | no |
 | <a name="input_s3_key"></a> [s3\_key](#input\_s3\_key) | Path of the zip file which is present in s3 bucket | `string` | `""` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security geoup id | `list(any)` | `null` | no |
+| <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | SNS topic arn | `string` | `""` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Lambda source file | `string` | `""` | no |
 | <a name="input_sqs_queue_arn"></a> [sqs\_queue\_arn](#input\_sqs\_queue\_arn) | SQS queue arn | `string` | `""` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets | `list(any)` | `null` | no |

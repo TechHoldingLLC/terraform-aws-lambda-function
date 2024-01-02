@@ -115,6 +115,12 @@ variable "source_file" {
   default     = ""
 }
 
+variable "sns_topic_arn" {
+  description = "SNS topic arn"
+  type        = string
+  default     = ""
+}
+
 variable "output_path" {
   description = "The name for the zip file created with the file described in source_file"
   default     = ""
