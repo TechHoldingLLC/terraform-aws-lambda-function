@@ -66,7 +66,7 @@ resource "aws_lambda_function" "lambda" {
 }
 
 # ------------------------------------------------------------------------------
-# ASSIGN PERMISSION TO API GATEWAY, COGNITO, SQS AND EVENTBRIDGE
+# ASSIGN PERMISSION TO API GATEWAY, COGNITO, SQS, SNS AND EVENTBRIDGE
 # ------------------------------------------------------------------------------
 
 resource "aws_lambda_permission" "api" {
@@ -103,6 +103,15 @@ resource "aws_lambda_permission" "eventbridge" {
   function_name = aws_lambda_function.lambda.function_name
   principal     = "events.amazonaws.com"
   source_arn    = var.eventbridge_rule_arn
+}
+
+resource "aws_lambda_permission" "sns" {
+  count         = length(var.sns_topic_arn) > 0 ? 1 : 0
+  statement_id  = "AllowInvocationFromSNS"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = var.sns_topic_arn
 }
 
 # ------------------------------------------------------------------------------
