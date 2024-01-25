@@ -27,9 +27,10 @@ No modules.
 | [aws_lambda_function.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_lambda_function_url.function_url](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function_url) | resource |
 | [aws_lambda_permission.api](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_lambda_permission.cloudwatch_scheduler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.cognito](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.eventbridge](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.permission](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_lambda_permission.sns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.sqs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [archive_file.lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_iam_policy_document.lambda_service_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -41,6 +42,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_apigw_execution_arn"></a> [apigw\_execution\_arn](#input\_apigw\_execution\_arn) | Apigw execution arn | `list` | `[]` | no |
+| <a name="input_cloudwatch_scheduler_arn"></a> [cloudwatch\_scheduler\_arn](#input\_cloudwatch\_scheduler\_arn) | Cloudwatch scheduler arn | `string` | `""` | no |
 | <a name="input_cognito_pool_arn"></a> [cognito\_pool\_arn](#input\_cognito\_pool\_arn) | Cognito pool arn | `string` | `""` | no |
 | <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | n/a | yes |
 | <a name="input_env_vars_from_parameter_store"></a> [env\_vars\_from\_parameter\_store](#input\_env\_vars\_from\_parameter\_store) | Lambda environment variables from SSM parameter store | `map(any)` | `{}` | no |

@@ -130,3 +130,8 @@ variable "eventbridge_rule_arn" {
   description = "Eventbridge rule arn"
   default     = ""
 }
+
+variable "cloudwatch_scheduler_arn" {
+  description = "Cloudwatch scheduler arn"
+  default     = ""
+}
