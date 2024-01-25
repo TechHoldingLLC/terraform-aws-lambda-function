@@ -65,9 +65,9 @@ resource "aws_lambda_function" "lambda" {
   }
 }
 
-# ------------------------------------------------------------------------------
-# ASSIGN PERMISSION TO API GATEWAY, COGNITO, SQS, SNS AND EVENTBRIDGE
-# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------
+# ASSIGN PERMISSION TO API GATEWAY, COGNITO, SQS, SNS, Cloudwatch Scheduler AND EVENTBRIDGE
+# ------------------------------------------------------------------------------------------
 
 resource "aws_lambda_permission" "api" {
   count         = length(var.apigw_execution_arn) > 0 ? 1 : 0
@@ -112,6 +112,15 @@ resource "aws_lambda_permission" "sns" {
   function_name = aws_lambda_function.lambda.function_name
   principal     = "sns.amazonaws.com"
   source_arn    = var.sns_topic_arn
+}
+
+resource "aws_lambda_permission" "cloudwatch_scheduler" {
+  count         = length(var.cloudwatch_scheduler_arn) > 0 ? 1 : 0
+  statement_id  = "AllowExecutionFromEventbridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambda.function_name
+  principal     = "scheduler.amazonaws.com"
+  source_arn    = var.cloudwatch_scheduler_arn
 }
 
 # ------------------------------------------------------------------------------
