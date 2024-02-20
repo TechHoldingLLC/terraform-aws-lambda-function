@@ -135,3 +135,33 @@ variable "cloudwatch_scheduler_arn" {
   description = "Cloudwatch scheduler arn"
   default     = ""
 }
+
+variable "enable_api_invoke_permission" {
+  description = "Enable api invoke permission"
+  default     = false
+}
+
+variable "enable_cognito_invoke_permission" {
+  description = "Enable cognito invoke permission"
+  default     = false
+}
+
+variable "enable_sqs_invoke_permission" {
+  description = "Enable sqs invoke permission"
+  default     = false
+}
+
+variable "enable_eventbridge_invoke_permission" {
+  description = "Enable eventbridge invoke permission"
+  default     = false
+}
+
+variable "enable_sns_invoke_permission" {
+  description = "Enable sns invoke permission"
+  default     = false
+}
+
+variable "enable_scheduler_invoke_permission" {
+  description = "Enable scheduler invoke permission"
+  default     = false
+}

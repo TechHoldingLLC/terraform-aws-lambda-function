@@ -45,6 +45,12 @@ No modules.
 | <a name="input_cloudwatch_scheduler_arn"></a> [cloudwatch\_scheduler\_arn](#input\_cloudwatch\_scheduler\_arn) | Cloudwatch scheduler arn | `string` | `""` | no |
 | <a name="input_cognito_pool_arn"></a> [cognito\_pool\_arn](#input\_cognito\_pool\_arn) | Cognito pool arn | `string` | `""` | no |
 | <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | n/a | yes |
+| <a name="input_enable_api_invoke_permission"></a> [enable\_api\_invoke\_permission](#input\_enable\_api\_invoke\_permission) | Enable api invoke permission | `bool` | `false` | no |
+| <a name="input_enable_cognito_invoke_permission"></a> [enable\_cognito\_invoke\_permission](#input\_enable\_cognito\_invoke\_permission) | Enable cognito invoke permission | `bool` | `false` | no |
+| <a name="input_enable_eventbridge_invoke_permission"></a> [enable\_eventbridge\_invoke\_permission](#input\_enable\_eventbridge\_invoke\_permission) | Enable eventbridge invoke permission | `bool` | `false` | no |
+| <a name="input_enable_scheduler_invoke_permission"></a> [enable\_scheduler\_invoke\_permission](#input\_enable\_scheduler\_invoke\_permission) | Enable scheduler invoke permission | `bool` | `false` | no |
+| <a name="input_enable_sns_invoke_permission"></a> [enable\_sns\_invoke\_permission](#input\_enable\_sns\_invoke\_permission) | Enable sns invoke permission | `bool` | `false` | no |
+| <a name="input_enable_sqs_invoke_permission"></a> [enable\_sqs\_invoke\_permission](#input\_enable\_sqs\_invoke\_permission) | Enable sqs invoke permission | `bool` | `false` | no |
 | <a name="input_env_vars_from_parameter_store"></a> [env\_vars\_from\_parameter\_store](#input\_env\_vars\_from\_parameter\_store) | Lambda environment variables from SSM parameter store | `map(any)` | `{}` | no |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | Environment Variables for Lambda Functions | `map(any)` | `{}` | no |
 | <a name="input_eventbridge_rule_arn"></a> [eventbridge\_rule\_arn](#input\_eventbridge\_rule\_arn) | Eventbridge rule arn | `string` | `""` | no |
