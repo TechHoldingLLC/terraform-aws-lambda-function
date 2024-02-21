@@ -70,7 +70,7 @@ resource "aws_lambda_function" "lambda" {
 # ------------------------------------------------------------------------------------------
 
 resource "aws_lambda_permission" "api" {
-  count         = length(var.apigw_execution_arn) > 0 ? 1 : 0
+  count         = var.enable_api_invoke_permission ? 1 : 0
   statement_id  = "AllowAPIGWLambdaInvoke"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
@@ -79,7 +79,7 @@ resource "aws_lambda_permission" "api" {
 }
 
 resource "aws_lambda_permission" "cognito" {
-  count         = length(var.cognito_pool_arn) > 0 ? 1 : 0
+  count         = var.enable_cognito_invoke_permission ? 1 : 0
   statement_id  = "AllowCognitoPoolLambdaInvoke"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
@@ -88,7 +88,7 @@ resource "aws_lambda_permission" "cognito" {
 }
 
 resource "aws_lambda_permission" "sqs" {
-  count         = length(var.sqs_queue_arn) > 0 ? 1 : 0
+  count         = var.enable_sqs_invoke_permission ? 1 : 0
   statement_id  = "AllowExecutionFromSQS"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
@@ -97,7 +97,7 @@ resource "aws_lambda_permission" "sqs" {
 }
 
 resource "aws_lambda_permission" "eventbridge" {
-  count         = length(var.eventbridge_rule_arn) > 0 ? 1 : 0
+  count         = var.enable_eventbridge_invoke_permission ? 1 : 0
   statement_id  = "AllowExecutionFromEventBridge"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
@@ -106,7 +106,7 @@ resource "aws_lambda_permission" "eventbridge" {
 }
 
 resource "aws_lambda_permission" "sns" {
-  count         = length(var.sns_topic_arn) > 0 ? 1 : 0
+  count         = var.enable_sns_invoke_permission ? 1 : 0
   statement_id  = "AllowInvocationFromSNS"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
@@ -115,7 +115,7 @@ resource "aws_lambda_permission" "sns" {
 }
 
 resource "aws_lambda_permission" "cloudwatch_scheduler" {
-  count         = length(var.cloudwatch_scheduler_arn) > 0 ? 1 : 0
+  count         = var.enable_scheduler_invoke_permission ? 1 : 0
   statement_id  = "AllowExecutionFromEventbridge"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name

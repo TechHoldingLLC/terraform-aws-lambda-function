@@ -40,14 +40,15 @@ module "lambda_test" {
 Api gateway will invoke the lambda function where function is created from zip file named lambda.zip uploaded in s3 bucket where key is path for zip file in the bucket. 
 ```
 module "lambda_test" {
-  source                  = "./lambda"
-  function_name           = "${var.prefix}-test-lambda"
-  handler                 = "lambda.handler"
-  lambda_runtime          = "python3.x"
-  s3_bucket               = "${var.prefix}-test-lambda"
-  s3_key                  = "lambda.zip"
-  description             = "Allow apigw to invoke lambda"
-  apigw_execution_arn     = "arn:aws:apigateway:region::resource-path-specifier" 
+  source                       = "./lambda"
+  function_name                = "${var.prefix}-test-lambda"
+  handler                      = "lambda.handler"
+  lambda_runtime               = "python3.x"
+  s3_bucket                    = "${var.prefix}-test-lambda"
+  s3_key                       = "lambda.zip"
+  description                  = "Allow apigw to invoke lambda"
+  enable_api_invoke_permission = true
+  apigw_execution_arn          = "arn:aws:apigateway:region::resource-path-specifier" 
   logs_retention = 14
 }
 ```
