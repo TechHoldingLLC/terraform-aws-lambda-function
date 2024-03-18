@@ -21,10 +21,10 @@ output "function_url" {
 
 output "role_name" {
   description = "Role name"
-  value       = aws_iam_role.lambda.arn
+  value       = aws_iam_role.lambda.name
 }
 
 output "role_arn" {
   description = "Role arn"
-  value       = aws_iam_role.lambda.name
+  value       = aws_iam_role.lambda.arn
 }
