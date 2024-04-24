@@ -168,5 +168,5 @@ variable "enable_scheduler_invoke_permission" {
 
 variable "tags" {
   description = "Tags"
-  default = {}
+  default     = {}
 }
