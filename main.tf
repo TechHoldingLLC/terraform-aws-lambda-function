@@ -64,6 +64,8 @@ resource "aws_lambda_function" "lambda" {
       subnet_ids         = var.subnets
     }
   }
+
+  tags = var.tags
 }
 
 # ------------------------------------------------------------------------------------------

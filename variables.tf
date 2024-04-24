@@ -165,3 +165,8 @@ variable "enable_scheduler_invoke_permission" {
   description = "Enable scheduler invoke permission"
   default     = false
 }
+
+variable "tags" {
+  description = "Tags"
+  default = {}
+}
