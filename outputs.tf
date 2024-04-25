@@ -28,3 +28,8 @@ output "role_arn" {
   description = "Role arn"
   value       = aws_iam_role.lambda.arn
 }
+
+output "lambda_config" {
+  description = "Lambda Config"
+  value       = aws_lambda_function.lambda
+}
