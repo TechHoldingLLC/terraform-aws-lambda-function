@@ -63,6 +63,7 @@ variable "lambda_memory" {
 
 variable "lambda_runtime" {
   description = "Lambda language"
+  default = null
 }
 
 variable "layers_arn" {
