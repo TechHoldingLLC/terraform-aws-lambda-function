@@ -23,6 +23,7 @@ variable "function_url_cors" {
 
 variable "description" {
   description = "Lambda function description"
+  default = null
 }
 
 variable "environment_variables" {
