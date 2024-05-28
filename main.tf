@@ -47,6 +47,8 @@ resource "aws_lambda_function" "lambda" {
   s3_object_version = try(data.aws_s3_object.lambda[0].version_id, null)
   source_code_hash  = try(data.aws_s3_object.lambda[0].metadata.source_code_hash, null)
   filename          = try(data.archive_file.lambda[0].output_path, null)
+  image_uri         = var.image_uri
+  package_type      = var.package_type
   layers            = var.layers_arn
   publish           = var.publish
 

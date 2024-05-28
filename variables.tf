@@ -37,6 +37,17 @@ variable "function_name" {
 
 variable "handler" {
   description = "Name of Handler"
+  default = null
+}
+
+variable "image_uri" {
+  description = "uri of image"
+  default = null
+}
+
+variable "package_type" {
+  description = "type of package"
+  default = null
 }
 
 variable "s3_bucket" {
