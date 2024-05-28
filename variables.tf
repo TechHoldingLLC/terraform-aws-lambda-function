@@ -18,7 +18,7 @@ variable "function_url" {
 variable "function_url_cors" {
   description = "Function url cors"
   type        = any
-  default     = []
+  default     = {}
 }
 
 variable "description" {
