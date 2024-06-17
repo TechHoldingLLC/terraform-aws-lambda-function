@@ -76,7 +76,7 @@ module "lambda_test" {
 
   function_name                        = "my-lambda"
   lambda_timeout                       = 60 #seconds
-  image_uri                            = "${module.ecr.repository_url}:${var.image_tag}"
+  image_uri                            = "image_uri:image_tag"
   package_type                         = "Image"
   environment_variables = {
     BAR = "FOO"
