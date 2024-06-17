@@ -23,7 +23,7 @@ variable "function_url_cors" {
 
 variable "description" {
   description = "Lambda function description"
-  default = null
+  default     = null
 }
 
 variable "environment_variables" {
@@ -38,17 +38,17 @@ variable "function_name" {
 
 variable "handler" {
   description = "Name of Handler"
-  default = null
+  default     = null
 }
 
 variable "image_uri" {
   description = "uri of image"
-  default = null
+  default     = null
 }
 
 variable "package_type" {
   description = "type of package"
-  default = null
+  default     = null
 }
 
 variable "s3_bucket" {
@@ -63,7 +63,7 @@ variable "lambda_memory" {
 
 variable "lambda_runtime" {
   description = "Lambda language"
-  default = null
+  default     = null
 }
 
 variable "layers_arn" {
