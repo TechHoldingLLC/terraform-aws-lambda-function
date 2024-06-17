@@ -68,3 +68,18 @@ module "lambda_test" {
   logs_retention          = 14
 }
 ```
+
+## Create Lambda function from docker image
+```
+module "lambda_test" {
+  source = "git::https://github.com/TechHoldingLLC/terraform-aws-lambda-function.git"
+
+  function_name                        = "my-lambda"
+  lambda_timeout                       = 60 #seconds
+  image_uri                            = "image_uri:image_tag"
+  package_type                         = "Image"
+  environment_variables = {
+    BAR = "FOO"
+  }
+}
+```

@@ -44,7 +44,7 @@ No modules.
 | <a name="input_apigw_execution_arn"></a> [apigw\_execution\_arn](#input\_apigw\_execution\_arn) | Apigw execution arn | `list` | `[]` | no |
 | <a name="input_cloudwatch_scheduler_arn"></a> [cloudwatch\_scheduler\_arn](#input\_cloudwatch\_scheduler\_arn) | Cloudwatch scheduler arn | `string` | `""` | no |
 | <a name="input_cognito_pool_arn"></a> [cognito\_pool\_arn](#input\_cognito\_pool\_arn) | Cognito pool arn | `string` | `""` | no |
-| <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | n/a | yes |
+| <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | `null` | no |
 | <a name="input_enable_api_invoke_permission"></a> [enable\_api\_invoke\_permission](#input\_enable\_api\_invoke\_permission) | Enable api invoke permission | `bool` | `false` | no |
 | <a name="input_enable_cognito_invoke_permission"></a> [enable\_cognito\_invoke\_permission](#input\_enable\_cognito\_invoke\_permission) | Enable cognito invoke permission | `bool` | `false` | no |
 | <a name="input_enable_eventbridge_invoke_permission"></a> [enable\_eventbridge\_invoke\_permission](#input\_enable\_eventbridge\_invoke\_permission) | Enable eventbridge invoke permission | `bool` | `false` | no |
@@ -56,14 +56,16 @@ No modules.
 | <a name="input_eventbridge_rule_arn"></a> [eventbridge\_rule\_arn](#input\_eventbridge\_rule\_arn) | Eventbridge rule arn | `string` | `""` | no |
 | <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Lambda function name | `any` | n/a | yes |
 | <a name="input_function_url"></a> [function\_url](#input\_function\_url) | Create lambda function url | `bool` | `false` | no |
-| <a name="input_function_url_cors"></a> [function\_url\_cors](#input\_function\_url\_cors) | Function url cors | `any` | `[]` | no |
-| <a name="input_handler"></a> [handler](#input\_handler) | Name of Handler | `any` | n/a | yes |
+| <a name="input_function_url_cors"></a> [function\_url\_cors](#input\_function\_url\_cors) | Function url cors | `any` | `{}` | no |
+| <a name="input_handler"></a> [handler](#input\_handler) | Name of Handler | `any` | `null` | no |
+| <a name="input_image_uri"></a> [image\_uri](#input\_image\_uri) | uri of image | `any` | `null` | no |
 | <a name="input_lambda_memory"></a> [lambda\_memory](#input\_lambda\_memory) | Required Memory for Lambda function | `number` | `128` | no |
-| <a name="input_lambda_runtime"></a> [lambda\_runtime](#input\_lambda\_runtime) | Lambda language | `any` | n/a | yes |
+| <a name="input_lambda_runtime"></a> [lambda\_runtime](#input\_lambda\_runtime) | Lambda language | `any` | `null` | no |
 | <a name="input_lambda_timeout"></a> [lambda\_timeout](#input\_lambda\_timeout) | Required Timeout for Lambda function | `number` | `5` | no |
 | <a name="input_layers_arn"></a> [layers\_arn](#input\_layers\_arn) | Lambda layer arn | `list(string)` | `null` | no |
 | <a name="input_logs_retention"></a> [logs\_retention](#input\_logs\_retention) | Specifies the number of days you want to retain log events in the specified log group | `number` | `null` | no |
 | <a name="input_output_path"></a> [output\_path](#input\_output\_path) | The name for the zip file created with the file described in source\_file | `string` | `""` | no |
+| <a name="input_package_type"></a> [package\_type](#input\_package\_type) | type of package | `any` | `null` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Prefix for resources | `string` | `""` | no |
 | <a name="input_publish"></a> [publish](#input\_publish) | Publish lambda function version | `bool` | `false` | no |
 | <a name="input_s3_bucket"></a> [s3\_bucket](#input\_s3\_bucket) | Lambda artifacts bucket | `string` | `""` | no |
@@ -73,6 +75,7 @@ No modules.
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Lambda source file | `string` | `""` | no |
 | <a name="input_sqs_queue_arn"></a> [sqs\_queue\_arn](#input\_sqs\_queue\_arn) | SQS queue arn | `string` | `""` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets | `list(any)` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags | `map` | `{}` | no |
 
 ## Outputs
 
