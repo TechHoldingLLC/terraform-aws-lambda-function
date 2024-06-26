@@ -74,58 +74,19 @@ resource "aws_lambda_function" "lambda" {
 # ASSIGN PERMISSION TO API GATEWAY, COGNITO, SQS, SNS, Cloudwatch Scheduler AND EVENTBRIDGE
 # ------------------------------------------------------------------------------------------
 
-resource "aws_lambda_permission" "api" {
-  count         = var.enable_api_invoke_permission ? 1 : 0
-  statement_id  = "AllowAPIGWLambdaInvoke"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "${var.apigw_execution_arn}/*/*/*"
-}
+resource "aws_lambda_permission" "triggers" {
+  for_each = { for k, v in var.allowed_triggers : k => v }
 
-resource "aws_lambda_permission" "cognito" {
-  count         = var.enable_cognito_invoke_permission ? 1 : 0
-  statement_id  = "AllowCognitoPoolLambdaInvoke"
-  action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.lambda.function_name
-  principal     = "cognito-idp.amazonaws.com"
-  source_arn    = var.cognito_pool_arn
-}
 
-resource "aws_lambda_permission" "sqs" {
-  count         = var.enable_sqs_invoke_permission ? 1 : 0
-  statement_id  = "AllowExecutionFromSQS"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
-  principal     = "sqs.amazonaws.com"
-  source_arn    = var.sqs_queue_arn
-}
+  statement_id = try(each.value.statement_id ,format("Allow%sLambdaInvoke", try(each.key, "")))
+  action       = "lambda:InvokeFunction"
+  principal    = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
+  source_arn   = try(each.value.source_arn, null)
 
-resource "aws_lambda_permission" "eventbridge" {
-  count         = var.enable_eventbridge_invoke_permission ? 1 : 0
-  statement_id  = "AllowExecutionFromEventBridge"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
-  principal     = "events.amazonaws.com"
-  source_arn    = var.eventbridge_rule_arn
-}
-
-resource "aws_lambda_permission" "sns" {
-  count         = var.enable_sns_invoke_permission ? 1 : 0
-  statement_id  = "AllowInvocationFromSNS"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
-  principal     = "sns.amazonaws.com"
-  source_arn    = var.sns_topic_arn
-}
-
-resource "aws_lambda_permission" "cloudwatch_scheduler" {
-  count         = var.enable_scheduler_invoke_permission ? 1 : 0
-  statement_id  = "AllowExecutionFromEventbridge"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.lambda.function_name
-  principal     = "scheduler.amazonaws.com"
-  source_arn    = var.cloudwatch_scheduler_arn
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # ------------------------------------------------------------------------------

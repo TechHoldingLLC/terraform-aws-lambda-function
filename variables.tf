@@ -1,6 +1,7 @@
-variable "apigw_execution_arn" {
-  description = "Apigw execution arn"
-  default     = []
+variable "allowed_triggers" {
+  description = "Map of allowed triggers to create Lambda permissions"
+  type        = map(any)
+  default     = {}
 }
 
 variable "env_vars_from_parameter_store" {
@@ -94,12 +95,6 @@ variable "subnets" {
   default     = null
 }
 
-variable "cognito_pool_arn" {
-  type        = string
-  default     = ""
-  description = "Cognito pool arn"
-}
-
 variable "logs_retention" {
   description = "Specifies the number of days you want to retain log events in the specified log group"
   type        = number
@@ -108,12 +103,6 @@ variable "logs_retention" {
 
 variable "prefix" {
   description = "Prefix for resources"
-  type        = string
-  default     = ""
-}
-
-variable "sqs_queue_arn" {
-  description = "SQS queue arn"
   type        = string
   default     = ""
 }
@@ -128,55 +117,9 @@ variable "source_file" {
   default     = ""
 }
 
-variable "sns_topic_arn" {
-  description = "SNS topic arn"
-  type        = string
-  default     = ""
-}
-
 variable "output_path" {
   description = "The name for the zip file created with the file described in source_file"
   default     = ""
-}
-
-variable "eventbridge_rule_arn" {
-  description = "Eventbridge rule arn"
-  default     = ""
-}
-
-variable "cloudwatch_scheduler_arn" {
-  description = "Cloudwatch scheduler arn"
-  default     = ""
-}
-
-variable "enable_api_invoke_permission" {
-  description = "Enable api invoke permission"
-  default     = false
-}
-
-variable "enable_cognito_invoke_permission" {
-  description = "Enable cognito invoke permission"
-  default     = false
-}
-
-variable "enable_sqs_invoke_permission" {
-  description = "Enable sqs invoke permission"
-  default     = false
-}
-
-variable "enable_eventbridge_invoke_permission" {
-  description = "Enable eventbridge invoke permission"
-  default     = false
-}
-
-variable "enable_sns_invoke_permission" {
-  description = "Enable sns invoke permission"
-  default     = false
-}
-
-variable "enable_scheduler_invoke_permission" {
-  description = "Enable scheduler invoke permission"
-  default     = false
 }
 
 variable "tags" {
