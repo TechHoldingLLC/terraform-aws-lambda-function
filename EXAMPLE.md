@@ -47,8 +47,18 @@ module "lambda_test" {
   s3_bucket                    = "${var.prefix}-test-lambda"
   s3_key                       = "lambda.zip"
   description                  = "Allow apigw to invoke lambda"
-  enable_api_invoke_permission = true
-  apigw_execution_arn          = "arn:aws:apigateway:region::resource-path-specifier" 
+  allowed_triggers = {
+    APIGatewayAny = {
+      statement_id = "AllowAPIGWLambdaInvoke"
+      principal    = "apigateway.amazonaws.com"       #you can pass either service or principal
+      source_arn   = "arn:aws:execute-api:us-west-2:123456789123:aqnku8akd0/*/*/*"
+    },
+    APIGatewayDevPost = {
+      service      = "apigateway"
+      source_arn   = "arn:aws:execute-api:us-west-2:123456789123:aqnku8akd0/dev/POST/*"
+    }
+  }
+  
   logs_retention = 14
 }
 ```
@@ -80,6 +90,55 @@ module "lambda_test" {
   package_type                         = "Image"
   environment_variables = {
     BAR = "FOO"
+  }
+}
+```
+
+## Lambda Permission for allowed triggers
+Lambda Permissions should be specified to allow certain resources to invoke Lambda Function.
+[List of AWS Service Principals](https://gist.github.com/shortjared/4c1e3fe52bdfa47522cfe5b41e5d6f22)
+
+The example below demonstrates how to configure various services to trigger a Lambda function.
+```
+module "lambda_function" {
+  source = "git::https://github.com/TechHoldingLLC/terraform-aws-lambda-function.git"
+
+  # ...omitted for brevity
+
+  allowed_triggers = {
+    CognitoIdentityPool = {
+      statement_id  = "AllowCognitoPoolLambdaInvoke"
+      principal     = "cognito-idp.amazonaws.com"     # or service = "cognito-idp"
+      source_arn    = var.cognito_pool_arn
+    },
+    APIGatewayAny = {
+      statement_id = "AllowAPIGWLambdaInvoke"
+      principal    = "apigateway.amazonaws.com"
+      source_arn   = "arn:aws:execute-api:us-west-2:123456789123:aqnku8akd0/*/*/*"
+    },
+    APIGatewayDevPost = {
+      service      = "apigateway"
+      source_arn   = "arn:aws:execute-api:us-west-2:123456789123:aqnku8akd0/dev/POST/*"
+    },
+    SQS = {
+      statement_id = "AllowExecutionFromSQS"
+      service      = "sqs"                            # or prinicipal = "sqs.amazonaws.com"
+      source_arn   = var.sqs_queue_arn
+    },
+    SNS = {
+      statement_id = "AllowInvocationFromSNS"
+      principal    = "sns.amazonaws.com"              # or service = "sns"
+      source_arn    = var.sns_topic_arn
+    },
+    EventBridge = {
+      statement_id = "AllowExecutionFromEventBridge"
+      principal    = "events.amazonaws.com"           # or service = "events"
+      source_arn   = var.eventbridge_rule_arn
+    },
+    CloudwarchScheduler = {
+      principal  = "scheduler.amazonaws.com"          # or service = "scheduler"
+      source_arn = var.cloudwatch_scheduler_arn
+    }
   }
 }
 ```

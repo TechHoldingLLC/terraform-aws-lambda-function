@@ -26,12 +26,7 @@ No modules.
 | [aws_iam_role_policy_attachment.lambda_vpc_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_function.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_lambda_function_url.function_url](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function_url) | resource |
-| [aws_lambda_permission.api](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.cloudwatch_scheduler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.cognito](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.eventbridge](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.sns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
-| [aws_lambda_permission.sqs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_lambda_permission.triggers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [archive_file.lambda](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_iam_policy_document.lambda_service_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_s3_object.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_object) | data source |
@@ -41,19 +36,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_apigw_execution_arn"></a> [apigw\_execution\_arn](#input\_apigw\_execution\_arn) | Apigw execution arn | `list` | `[]` | no |
-| <a name="input_cloudwatch_scheduler_arn"></a> [cloudwatch\_scheduler\_arn](#input\_cloudwatch\_scheduler\_arn) | Cloudwatch scheduler arn | `string` | `""` | no |
-| <a name="input_cognito_pool_arn"></a> [cognito\_pool\_arn](#input\_cognito\_pool\_arn) | Cognito pool arn | `string` | `""` | no |
+| <a name="input_allowed_triggers"></a> [allowed\_triggers](#input\_allowed\_triggers) | Map of allowed triggers to create Lambda permissions | `map(any)` | `{}` | no |
 | <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | `null` | no |
-| <a name="input_enable_api_invoke_permission"></a> [enable\_api\_invoke\_permission](#input\_enable\_api\_invoke\_permission) | Enable api invoke permission | `bool` | `false` | no |
-| <a name="input_enable_cognito_invoke_permission"></a> [enable\_cognito\_invoke\_permission](#input\_enable\_cognito\_invoke\_permission) | Enable cognito invoke permission | `bool` | `false` | no |
-| <a name="input_enable_eventbridge_invoke_permission"></a> [enable\_eventbridge\_invoke\_permission](#input\_enable\_eventbridge\_invoke\_permission) | Enable eventbridge invoke permission | `bool` | `false` | no |
-| <a name="input_enable_scheduler_invoke_permission"></a> [enable\_scheduler\_invoke\_permission](#input\_enable\_scheduler\_invoke\_permission) | Enable scheduler invoke permission | `bool` | `false` | no |
-| <a name="input_enable_sns_invoke_permission"></a> [enable\_sns\_invoke\_permission](#input\_enable\_sns\_invoke\_permission) | Enable sns invoke permission | `bool` | `false` | no |
-| <a name="input_enable_sqs_invoke_permission"></a> [enable\_sqs\_invoke\_permission](#input\_enable\_sqs\_invoke\_permission) | Enable sqs invoke permission | `bool` | `false` | no |
 | <a name="input_env_vars_from_parameter_store"></a> [env\_vars\_from\_parameter\_store](#input\_env\_vars\_from\_parameter\_store) | Lambda environment variables from SSM parameter store | `map(any)` | `{}` | no |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | Environment Variables for Lambda Functions | `map(any)` | `{}` | no |
-| <a name="input_eventbridge_rule_arn"></a> [eventbridge\_rule\_arn](#input\_eventbridge\_rule\_arn) | Eventbridge rule arn | `string` | `""` | no |
 | <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Lambda function name | `any` | n/a | yes |
 | <a name="input_function_url"></a> [function\_url](#input\_function\_url) | Create lambda function url | `bool` | `false` | no |
 | <a name="input_function_url_cors"></a> [function\_url\_cors](#input\_function\_url\_cors) | Function url cors | `any` | `{}` | no |
@@ -71,9 +57,7 @@ No modules.
 | <a name="input_s3_bucket"></a> [s3\_bucket](#input\_s3\_bucket) | Lambda artifacts bucket | `string` | `""` | no |
 | <a name="input_s3_key"></a> [s3\_key](#input\_s3\_key) | Path of the zip file which is present in s3 bucket | `string` | `""` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security geoup id | `list(any)` | `null` | no |
-| <a name="input_sns_topic_arn"></a> [sns\_topic\_arn](#input\_sns\_topic\_arn) | SNS topic arn | `string` | `""` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Lambda source file | `string` | `""` | no |
-| <a name="input_sqs_queue_arn"></a> [sqs\_queue\_arn](#input\_sqs\_queue\_arn) | SQS queue arn | `string` | `""` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets | `list(any)` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags | `map` | `{}` | no |
 
@@ -87,3 +71,8 @@ No modules.
 | <a name="output_invoke_arn"></a> [invoke\_arn](#output\_invoke\_arn) | Lambda Invoke ARN |
 | <a name="output_role_arn"></a> [role\_arn](#output\_role\_arn) | Role arn |
 | <a name="output_role_name"></a> [role\_name](#output\_role\_name) | Role name |
+
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/TechHoldingLLC/terraform-aws-lambda-function/blob/main/LICENSE) for full details.
