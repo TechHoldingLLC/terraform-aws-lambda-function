@@ -67,6 +67,22 @@ resource "aws_lambda_function" "lambda" {
     }
   }
 
+  dynamic "tracing_config" {
+    for_each = var.tracing_mode == null ? [] : [true]
+    content {
+      mode = var.tracing_mode
+    }
+  }
+
+  dynamic "image_config" {
+    for_each = length(var.image_config_entry_point) > 0 || length(var.image_config_command) > 0 || var.image_config_working_directory != null ? [true] : []
+    content {
+      entry_point       = var.image_config_entry_point
+      command           = var.image_config_command
+      working_directory = var.image_config_working_directory
+    }
+  }
+
   tags = var.tags
 }
 
@@ -118,4 +134,85 @@ resource "aws_lambda_function_url" "function_url" {
       max_age           = try(cors.value.max_age, null)
     }
   }
+}
+
+# ------------------------------------------------------------------------------
+# LAMBDA EVENT SOURCE MAPPING
+# ------------------------------------------------------------------------------
+resource "aws_lambda_event_source_mapping" "this" {
+  for_each = { for k, v in var.event_source_mapping : k => v }
+
+  function_name = aws_lambda_function.lambda.arn
+
+  event_source_arn = try(each.value.event_source_arn, null)
+
+  batch_size                         = try(each.value.batch_size, null)
+  maximum_batching_window_in_seconds = try(each.value.maximum_batching_window_in_seconds, null)
+  enabled                            = try(each.value.enabled, true)
+  starting_position                  = try(each.value.starting_position, null)
+  starting_position_timestamp        = try(each.value.starting_position_timestamp, null)
+  parallelization_factor             = try(each.value.parallelization_factor, null)
+  maximum_retry_attempts             = try(each.value.maximum_retry_attempts, null)
+  maximum_record_age_in_seconds      = try(each.value.maximum_record_age_in_seconds, null)
+  bisect_batch_on_function_error     = try(each.value.bisect_batch_on_function_error, null)
+  function_response_types            = try(each.value.function_response_types, null)
+  tumbling_window_in_seconds         = try(each.value.tumbling_window_in_seconds, null)
+
+  dynamic "destination_config" {
+    for_each = try(each.value.destination_arn_on_failure, null) != null ? [true] : []
+    content {
+      on_failure {
+        destination_arn = each.value["destination_arn_on_failure"]
+      }
+    }
+  }
+
+  dynamic "scaling_config" {
+    for_each = try([each.value.scaling_config], [])
+    content {
+      maximum_concurrency = try(scaling_config.value.maximum_concurrency, null)
+    }
+  }
+
+  dynamic "filter_criteria" {
+    for_each = try(each.value.filter_criteria, null) != null ? [true] : []
+
+    content {
+      dynamic "filter" {
+        for_each = try(flatten([each.value.filter_criteria]), [])
+
+        content {
+          pattern = try(filter.value.pattern, null)
+        }
+      }
+    }
+  }
+
+  dynamic "document_db_event_source_config" {
+    for_each = try(each.value.document_db_event_source_config, [])
+
+    content {
+      database_name   = document_db_event_source_config.value.database_name
+      collection_name = try(document_db_event_source_config.value.collection_name, null)
+      full_document   = try(document_db_event_source_config.value.full_document, null)
+    }
+  }
+
+  dynamic "metrics_config" {
+    for_each = try([each.value.metrics_config], [])
+
+    content {
+      metrics = metrics_config.value.metrics
+    }
+  }
+
+  dynamic "provisioned_poller_config" {
+    for_each = try([each.value.provisioned_poller_config], [])
+    content {
+      maximum_pollers = try(provisioned_poller_config.value.maximum_pollers, null)
+      minimum_pollers = try(provisioned_poller_config.value.minimum_pollers, null)
+    }
+  }
+
+  tags = merge(var.tags, try(each.value.tags, {}))
 }
