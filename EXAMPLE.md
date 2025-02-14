@@ -142,3 +142,21 @@ module "lambda_function" {
   }
 }
 ```
+
+## Lambda Event Source Mapping
+The example below demonstrates how to configure Lambda Event source Mapping
+```
+module "lambda_function" {
+  source = "git::https://github.com/TechHoldingLLC/terraform-aws-lambda-function.git?ref=v1.0.11"
+
+  # ...omitted for brevity
+
+  event_source_mapping = {
+    event_source_arn = module.sqs.arn
+    batch_size       = 10
+    scaling_config   = {
+      maximum_concurrency = 10
+    }
+  }
+}
+```

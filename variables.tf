@@ -126,3 +126,37 @@ variable "tags" {
   description = "Tags"
   default     = {}
 }
+
+variable "tracing_mode" {
+  description = "Tracing mode of the Lambda Function. Valid value can be either PassThrough or Active."
+  type        = string
+  default     = null
+}
+
+variable "image_config_entry_point" {
+  description = "The ENTRYPOINT for the docker image"
+  type        = list(string)
+  default     = []
+}
+
+variable "image_config_command" {
+  description = "The CMD for the docker image"
+  type        = list(string)
+  default     = []
+}
+
+variable "image_config_working_directory" {
+  description = "The working directory for the docker image"
+  type        = string
+  default     = null
+}
+
+############################################
+# Lambda Event Source Mapping
+############################################
+
+variable "event_source_mapping" {
+  description = "Map of event source mapping"
+  type        = any
+  default     = {}
+}

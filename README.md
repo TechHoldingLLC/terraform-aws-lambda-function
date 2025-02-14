@@ -24,6 +24,7 @@ No modules.
 | [aws_iam_role.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.lambda_basic_execution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.lambda_vpc_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_lambda_event_source_mapping.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_function.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_lambda_function_url.function_url](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function_url) | resource |
 | [aws_lambda_permission.triggers](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
@@ -40,10 +41,14 @@ No modules.
 | <a name="input_description"></a> [description](#input\_description) | Lambda function description | `any` | `null` | no |
 | <a name="input_env_vars_from_parameter_store"></a> [env\_vars\_from\_parameter\_store](#input\_env\_vars\_from\_parameter\_store) | Lambda environment variables from SSM parameter store | `map(any)` | `{}` | no |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | Environment Variables for Lambda Functions | `map(any)` | `{}` | no |
+| <a name="input_event_source_mapping"></a> [event\_source\_mapping](#input\_event\_source\_mapping) | Map of event source mapping | `any` | `{}` | no |
 | <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Lambda function name | `any` | n/a | yes |
 | <a name="input_function_url"></a> [function\_url](#input\_function\_url) | Create lambda function url | `bool` | `false` | no |
 | <a name="input_function_url_cors"></a> [function\_url\_cors](#input\_function\_url\_cors) | Function url cors | `any` | `{}` | no |
 | <a name="input_handler"></a> [handler](#input\_handler) | Name of Handler | `any` | `null` | no |
+| <a name="input_image_config_command"></a> [image\_config\_command](#input\_image\_config\_command) | The CMD for the docker image | `list(string)` | `[]` | no |
+| <a name="input_image_config_entry_point"></a> [image\_config\_entry\_point](#input\_image\_config\_entry\_point) | The ENTRYPOINT for the docker image | `list(string)` | `[]` | no |
+| <a name="input_image_config_working_directory"></a> [image\_config\_working\_directory](#input\_image\_config\_working\_directory) | The working directory for the docker image | `string` | `null` | no |
 | <a name="input_image_uri"></a> [image\_uri](#input\_image\_uri) | uri of image | `any` | `null` | no |
 | <a name="input_lambda_memory"></a> [lambda\_memory](#input\_lambda\_memory) | Required Memory for Lambda function | `number` | `128` | no |
 | <a name="input_lambda_runtime"></a> [lambda\_runtime](#input\_lambda\_runtime) | Lambda language | `any` | `null` | no |
@@ -60,6 +65,7 @@ No modules.
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Lambda source file | `string` | `""` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets | `list(any)` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags | `map` | `{}` | no |
+| <a name="input_tracing_mode"></a> [tracing\_mode](#input\_tracing\_mode) | Tracing mode of the Lambda Function. Valid value can be either PassThrough or Active. | `string` | `null` | no |
 
 ## Outputs
 
