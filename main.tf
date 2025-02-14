@@ -45,7 +45,7 @@ resource "aws_lambda_function" "lambda" {
   s3_bucket         = try(data.aws_s3_object.lambda[0].bucket, null)
   s3_key            = try(data.aws_s3_object.lambda[0].key, null)
   s3_object_version = try(data.aws_s3_object.lambda[0].version_id, null)
-  source_code_hash  = try(data.aws_s3_object.lambda[0].metadata.source_code_hash, null)
+  source_code_hash  = try(data.aws_s3_object.lambda[0].metadata.source_code_hash, data.archive_file.lambda[0].output_base64sha256, null)
   filename          = try(data.archive_file.lambda[0].output_path, null)
   image_uri         = var.image_uri
   package_type      = var.package_type
@@ -95,7 +95,7 @@ resource "aws_lambda_permission" "triggers" {
 
   function_name = aws_lambda_function.lambda.function_name
 
-  statement_id = try(each.value.statement_id ,format("Allow%sLambdaInvoke", try(each.key, "")))
+  statement_id = try(each.value.statement_id, format("Allow%sLambdaInvoke", try(each.key, "")))
   action       = "lambda:InvokeFunction"
   principal    = try(each.value.principal, format("%s.amazonaws.com", try(each.value.service, "")))
   source_arn   = try(each.value.source_arn, null)
