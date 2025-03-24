@@ -152,10 +152,12 @@ module "lambda_function" {
   # ...omitted for brevity
 
   event_source_mapping = {
-    event_source_arn = module.sqs.arn
-    batch_size       = 10
-    scaling_config   = {
-      maximum_concurrency = 10
+    sqs = {
+      event_source_arn = module.sqs.arn
+      batch_size       = 10
+      scaling_config   = {
+        maximum_concurrency = 10
+      }
     }
   }
 }
