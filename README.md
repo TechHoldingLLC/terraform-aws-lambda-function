@@ -50,6 +50,7 @@ No modules.
 | <a name="input_image_config_entry_point"></a> [image\_config\_entry\_point](#input\_image\_config\_entry\_point) | The ENTRYPOINT for the docker image | `list(string)` | `[]` | no |
 | <a name="input_image_config_working_directory"></a> [image\_config\_working\_directory](#input\_image\_config\_working\_directory) | The working directory for the docker image | `string` | `null` | no |
 | <a name="input_image_uri"></a> [image\_uri](#input\_image\_uri) | uri of image | `any` | `null` | no |
+| <a name="input_ipv6_allowed_for_dual_stack"></a> [ipv6\_allowed\_for\_dual\_stack](#input\_ipv6\_allowed\_for\_dual\_stack) | Allows outbound IPv6 traffic on VPC functions attached to dual-stack subnets | `bool` | `false` | no |
 | <a name="input_lambda_memory"></a> [lambda\_memory](#input\_lambda\_memory) | Required Memory for Lambda function | `number` | `128` | no |
 | <a name="input_lambda_runtime"></a> [lambda\_runtime](#input\_lambda\_runtime) | Lambda language | `any` | `null` | no |
 | <a name="input_lambda_timeout"></a> [lambda\_timeout](#input\_lambda\_timeout) | Required Timeout for Lambda function | `number` | `5` | no |
