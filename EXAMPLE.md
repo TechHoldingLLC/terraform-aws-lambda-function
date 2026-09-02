@@ -36,6 +36,22 @@ module "lambda_test" {
 }
 ```
 
+## Create lambda resource with source_code_hash to force redeploy on content change
+When the ZIP is uploaded to S3 under a fixed key/name (so the key itself never changes), pass `source_code_hash` computed from the ZIP so Terraform detects content changes and redeploys the function.
+```
+module "lambda_test" {
+  source         = "./lambda"
+  function_name  = "${var.prefix}-test-lambda"
+  handler        = "lambda.handler"
+  lambda_runtime = "python3.x"
+  s3_bucket      = "${var.prefix}-test-lambda"
+  s3_key         = "lambda.zip"
+  source_code_hash = filebase64sha256("lambda.zip")
+  description    = "Lambda resource with source_code_hash"
+  logs_retention = 14
+}
+```
+
 ## Create lambda resource attached to dual-stack subnets
 When the provided subnets are dual-stack (IPv4 and IPv6), set `ipv6_allowed_for_dual_stack` to `true` to allow the Lambda function to send outbound traffic over IPv6.
 ```
