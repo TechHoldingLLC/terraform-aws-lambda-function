@@ -128,12 +128,6 @@ variable "output_path" {
   default     = ""
 }
 
-variable "source_code_hash" {
-  description = "Base64-encoded SHA256 hash of the package file (e.g. filebase64sha256 on the zip being uploaded). Pass this so Terraform detects content changes and redeploys the Lambda function even when the S3 object key/ZIP name stays the same."
-  type        = string
-  default     = null
-}
-
 variable "tags" {
   description = "Tags"
   default     = {}

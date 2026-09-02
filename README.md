@@ -63,7 +63,6 @@ No modules.
 | <a name="input_s3_bucket"></a> [s3\_bucket](#input\_s3\_bucket) | Lambda artifacts bucket | `string` | `""` | no |
 | <a name="input_s3_key"></a> [s3\_key](#input\_s3\_key) | Path of the zip file which is present in s3 bucket | `string` | `""` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | Security geoup id | `list(any)` | `null` | no |
-| <a name="input_source_code_hash"></a> [source\_code\_hash](#input\_source\_code\_hash) | Base64-encoded SHA256 hash of the package file (e.g. filebase64sha256 on the zip being uploaded). Pass this so Terraform detects content changes and redeploys the Lambda function even when the S3 object key/ZIP name stays the same. | `string` | `null` | no |
 | <a name="input_source_file"></a> [source\_file](#input\_source\_file) | Lambda source file | `string` | `""` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets | `list(any)` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags | `map` | `{}` | no |
