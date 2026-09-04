@@ -95,6 +95,12 @@ variable "subnets" {
   default     = null
 }
 
+variable "ipv6_allowed_for_dual_stack" {
+  description = "Allows outbound IPv6 traffic on VPC functions attached to dual-stack subnets"
+  type        = bool
+  default     = false
+}
+
 variable "logs_retention" {
   description = "Specifies the number of days you want to retain log events in the specified log group"
   type        = number
