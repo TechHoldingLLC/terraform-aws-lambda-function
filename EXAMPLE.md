@@ -36,6 +36,24 @@ module "lambda_test" {
 }
 ```
 
+## Create lambda resource attached to dual-stack subnets
+When the provided subnets are dual-stack (IPv4 and IPv6), set `ipv6_allowed_for_dual_stack` to `true` to allow the Lambda function to send outbound traffic over IPv6.
+```
+module "lambda_test" {
+  source                      = "./lambda"
+  function_name               = "${var.prefix}-test-lambda"
+  handler                     = "lambda.handler"
+  lambda_runtime              = "python3.x"
+  s3_bucket                   = "${var.prefix}-test-lambda"
+  s3_key                      = "lambda.zip"
+  description                 = "Lambda resource attached to dual-stack subnets"
+  security_group_ids          = ["sg-1234567"]
+  subnets                     = ["subnet-1", "subnet-2"]
+  ipv6_allowed_for_dual_stack = true
+  logs_retention              = 14
+}
+```
+
 ## Allow apigw to invoke lambda
 Api gateway will invoke the lambda function where function is created from zip file named lambda.zip uploaded in s3 bucket where key is path for zip file in the bucket. 
 ```

@@ -62,8 +62,9 @@ resource "aws_lambda_function" "lambda" {
   dynamic "vpc_config" {
     for_each = var.subnets != null && var.security_group_ids != null ? [true] : []
     content {
-      security_group_ids = var.security_group_ids
-      subnet_ids         = var.subnets
+      security_group_ids          = var.security_group_ids
+      subnet_ids                  = var.subnets
+      ipv6_allowed_for_dual_stack = var.ipv6_allowed_for_dual_stack
     }
   }
 
